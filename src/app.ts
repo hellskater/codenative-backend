@@ -1,21 +1,23 @@
-import express from "express";
+import express from 'express'
 
-import { config } from "dotenv";
-import { initializeMiddlewares } from "@setup/middleware";
+import { config } from 'dotenv'
+import { initializeMiddlewares } from '@setup/middleware'
 
 // Initialising dotenv to read .env file
-config();
+config()
 
-const main = async () => {
-  const app = express();
-  const PORT = 1337;
+const main = async (): Promise<void> => {
+  const app = express()
+  const PORT = 1337
 
   // Initialising middlewares
-  initializeMiddlewares(app);
+  initializeMiddlewares(app)
 
   app.listen(PORT, () => {
-    console.log(`🚀 Server running at http://localhost:${PORT}`);
-  });
-};
+    console.log(`🚀 Server running at http://localhost:${PORT}`)
+  })
+}
 
-main();
+main().catch(() => {
+  console.log('Something went wrong!')
+})

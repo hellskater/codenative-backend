@@ -1,9 +1,9 @@
-import { Router } from "express";
+import { Router } from 'express'
 
-import { ExampleController } from "@api/controllers/example.controller";
+import { ExampleController } from '@api/controllers/example.controller'
 
-const router = Router();
+const router = Router()
 
-router.get("/", ExampleController.getExample);
+router.get('/', ExampleController.getExample)
 
-export default router;
+export default router

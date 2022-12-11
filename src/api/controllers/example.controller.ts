@@ -1,7 +1,7 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express'
 
 export class ExampleController {
-  static async getExample(req: Request, res: Response) {
-    res.send("Hello World srini!");
+  static async getExample (req: Request, res: Response): Promise<void> {
+    res.send('Hello World srini!')
   }
 }

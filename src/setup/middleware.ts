@@ -1,13 +1,13 @@
-import { json, urlencoded } from "express";
-import cors from "cors";
+import { json, urlencoded } from 'express'
+import cors from 'cors'
 
-import Router from "@api/routes";
+import Router from '@api/routes'
 
-export const initializeMiddlewares = (app: any) => {
-  app.use(urlencoded({ extended: true }));
-  app.use(json());
-  app.use(cors());
+export const initializeMiddlewares = (app: any): void => {
+  app.use(urlencoded({ extended: true }))
+  app.use(json())
+  app.use(cors())
 
   // Initialising routes
-  app.use("/api", Router);
-};
+  app.use('/api', Router)
+}
