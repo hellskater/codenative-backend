@@ -10,7 +10,7 @@
     "outDir": "dist",
     "strict": true,
     "lib": ["es2020"],
-    "baseUrl": ".",
+    "baseUrl": "src",
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
@@ -18,8 +18,9 @@
     "moduleResolution": "Node",
     "skipLibCheck": true,
     "paths": {
-      "@routes/*": ["./src/routes/*"],
-      "@middlewares/*": ["./src/middlewares/*"]
+      "@api/*": ["api/*"],
+      "@config/*": ["config/*"],
+      "@setup/*": ["setup/*"]
     }
   },
   "include": ["src/**/*"],
