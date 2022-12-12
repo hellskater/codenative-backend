@@ -13,5 +13,7 @@ module.exports = {
   rules: {
     "@typescript-eslint/no-extraneous-class": "off",
     "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/strict-boolean-expressions": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
   },
 };

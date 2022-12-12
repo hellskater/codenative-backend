@@ -12,8 +12,8 @@ import {
 
 import { env } from "@config/env";
 
-const AWS_ACCESS_KEY_ID = env.awsAccessKeyId!;
-const AWS_SECRET_ACCESS_KEY = env.awsSecretAccessKey!;
+const AWS_ACCESS_KEY_ID = env.awsAccessKeyId as string;
+const AWS_SECRET_ACCESS_KEY = env.awsSecretAccessKey as string;
 
 const client = new ECSClient({
   region: "us-east-1",
@@ -32,7 +32,7 @@ const ec2client = new EC2Client({
 });
 
 export class IpController {
-  static async issueIp(req: Request, res: Response) {
+  static async issueIp(req: Request, res: Response): Promise<void> {
     try {
       const { user, projectName } = req.body;
 
@@ -119,15 +119,16 @@ const getIpFromServer = async () => {
 
   const response = await client.send(command);
 
-  const taskArn = response.tasks && (response.tasks[0].taskArn as string);
+  const taskArn =
+    response.tasks != null ? (response.tasks[0].taskArn as string) : "";
 
-  const getContainerIP = () => {
-    return new Promise(function (resolve, reject) {
+  const getContainerIP = async (): Promise<string> => {
+    return await new Promise(function (resolve, reject) {
       setTimeout(getTaskDetails, 6000);
 
       async function getTaskDetails() {
         const taskCommand = new DescribeTasksCommand({
-          tasks: [taskArn!],
+          tasks: [taskArn],
           cluster: "Codedamn",
         });
         const task = await client.send(taskCommand);
@@ -136,20 +137,22 @@ const getIpFromServer = async () => {
         let eni = "";
 
         const details =
-          task.tasks &&
-          task.tasks[0].attachments &&
-          task.tasks[0].attachments[0].details;
+          task.tasks != null
+            ? task.tasks[0].attachments != null
+              ? task.tasks[0].attachments[0].details
+              : []
+            : [];
 
-        for (let i in details) {
-          if (!details.hasOwnProperty(i)) continue;
+        for (const i in details) {
+          if (!Object.prototype.hasOwnProperty.call(details, i)) continue;
           if (details[i as any].name !== "networkInterfaceId") continue;
 
           // get the eni
-          eni = details[i as any].value!;
+          eni = details[i as any].value as string;
           break;
         }
 
-        getNetworkDetails(eni);
+        await getNetworkDetails(eni);
       }
 
       const getNetworkDetails = async (eni: string) => {
@@ -158,10 +161,13 @@ const getIpFromServer = async () => {
         });
         const networkRes = await ec2client.send(networkCommand);
         const ip =
-          networkRes.NetworkInterfaces &&
-          networkRes.NetworkInterfaces[0].Association &&
-          networkRes.NetworkInterfaces[0].Association.PublicIp;
-        resolve(ip);
+          networkRes.NetworkInterfaces != null
+            ? networkRes.NetworkInterfaces[0].Association != null
+              ? networkRes.NetworkInterfaces[0].Association.PublicIp
+              : ""
+            : "";
+
+        resolve(ip as string);
       };
     });
   };

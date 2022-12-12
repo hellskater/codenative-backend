@@ -1,11 +1,11 @@
-import express from "express";
+import express from 'express'
 
-import exampleRoutes from "@api/routes/example";
-import IpRoutes from "@api/routes/ip";
+import exampleRoutes from '@api/routes/example'
+import IpRoutes from '@api/routes/ip'
 
-const router = express.Router();
+const router = express.Router()
 
-router.use("/example", exampleRoutes);
-router.use("/ip", IpRoutes);
+router.use('/example', exampleRoutes)
+router.use('/ip', IpRoutes)
 
-export default router;
+export default router

@@ -1,10 +1,10 @@
-import express from "express";
+import express from 'express'
 
-import { IpController } from "@api/controllers/ip.controller";
+import { IpController } from '@api/controllers/ip.controller'
 
-const router = express.Router();
+const router = express.Router()
 
-router.post("/get", IpController.issueIp);
-router.post("/destroy", IpController.destroyIp);
+router.post('/get', IpController.issueIp)
+router.post('/destroy', IpController.destroyIp)
 
-export default router;
+export default router
