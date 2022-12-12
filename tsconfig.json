@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "rootDir": "src",
     "target": "es2020",
     "module": "es2020",
     "allowJs": true,
@@ -9,14 +10,15 @@
     "sourceMap": true,
     "outDir": "dist",
     "strict": true,
-    "lib": ["es2020"],
+    "lib": ["es2020", "esnext.asynciterable"],
     "baseUrl": "src",
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "moduleResolution": "Node",
+    "moduleResolution": "node",
     "skipLibCheck": true,
+    "strictPropertyInitialization": false,
     "paths": {
       "@api/*": ["api/*"],
       "@config/*": ["config/*"],

@@ -1,23 +1,27 @@
-import express from 'express'
-
-import { config } from 'dotenv'
-import { initializeMiddlewares } from '@setup/middleware'
-
-// Initialising dotenv to read .env file
-config()
+import express from "express";
+import { initializeMiddlewares } from "@setup/middleware";
+import { connectToDatabase } from "@setup/db";
+import { initializeApolloServer } from "@setup/apolloserver";
 
 const main = async (): Promise<void> => {
-  const app = express()
-  const PORT = 1337
+  const app = express();
+  const PORT = 1337;
 
-  // Initialising middlewares
-  initializeMiddlewares(app)
+  // Connecting to database
+  await connectToDatabase();
+
+  // Initialising middlewares and routes
+  initializeMiddlewares(app);
+
+  // Initialising apollo server
+  await initializeApolloServer(app);
 
   app.listen(PORT, () => {
-    console.log(`🚀 Server running at http://localhost:${PORT}`)
-  })
-}
+    console.log(`🚀 Server running at http://localhost:${PORT}`);
+  });
+};
 
-main().catch(() => {
-  console.log('Something went wrong!')
-})
+main().catch((err) => {
+  console.log("Something went wrong!");
+  console.log(err);
+});
