@@ -1,89 +1,89 @@
-import { getModelForClass, prop } from "@typegoose/typegoose";
+import { getModelForClass, prop } from '@typegoose/typegoose'
 import {
   Field as GqlField,
   InputType,
-  ObjectType as GqlType,
-} from "type-graphql";
+  ObjectType as GqlType
+} from 'type-graphql'
 
 @InputType()
 export class FileInputType {
   @GqlField((_type) => String)
-  name: string;
+    name: string
 
   @GqlField((_type) => String)
-  type: string;
+    type: string
 
   @GqlField((_type) => String, { nullable: true })
-  content?: string;
+    content?: string
 }
 @GqlType()
 export class File {
   @GqlField((_type) => String)
   @prop({ required: true })
-  public name: string;
+  public name: string
 
   @GqlField((_type) => String)
   @prop({ required: true })
-  public type: string;
+  public type: string
 
   @GqlField((_type) => String, { nullable: true })
   @prop({ required: false })
-  public content?: string;
+  public content?: string
 }
 
 @GqlType()
 class Project {
   @GqlField((_type) => String)
   @prop({ required: true })
-  public name: string;
+  public name: string
 
   @GqlField((_type) => [File])
   @prop({ required: true, type: () => [File] })
-  public files: File[];
+  public files: File[]
 }
 
 @GqlType()
 class User {
   @GqlField((_type) => String)
   @prop({ required: true })
-  public name: string;
+  public name: string
 
   @GqlField((_type) => Project)
   @prop({ required: true, type: () => Project })
-  public project: Project;
+  public project: Project
 }
 
 const model = getModelForClass<typeof User>(User, {
   options: {
-    customName: "users",
-  },
-});
+    customName: 'users'
+  }
+})
 
-export default model;
+export default model
 
 @InputType()
 export class SaveFileInput {
   @GqlField()
-  user: string;
+    user: string
 
   @GqlField()
-  projectName: string;
+    projectName: string
 
   @GqlField((_type) => [FileInputType])
-  files: File[];
+    files: File[]
 }
 
 @InputType()
 export class GetFileInput {
   @GqlField()
-  user: string;
+    user: string
 
   @GqlField()
-  projectName: string;
+    projectName: string
 }
 
 @InputType()
 export class GetProjectsInput {
   @GqlField()
-  user: string;
+    user: string
 }

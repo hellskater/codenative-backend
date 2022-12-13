@@ -9,5 +9,5 @@ export const initializeMiddlewares = (app: any): void => {
   app.use(cors())
 
   // Initialising routes
-  app.use('/api', Router)
+  app.use('/', Router)
 }

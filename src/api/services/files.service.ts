@@ -1,54 +1,54 @@
 import UsersSchema, {
   GetFileInput,
   SaveFileInput,
-  GetProjectsInput,
-} from "@api/schema/files.schema";
+  GetProjectsInput
+} from '@api/schema/files.schema'
 
 class FileService {
-  async saveFiles({ files, user, projectName }: SaveFileInput) {
+  async saveFiles ({ files, user, projectName }: SaveFileInput) {
     const result = await UsersSchema.updateOne(
       {
         name: user,
-        "project.name": projectName,
+        'project.name': projectName
       },
       {
         $set: {
-          "project.files": files,
-        },
+          'project.files': files
+        }
       },
       { upsert: true }
-    );
+    )
 
     if (result) {
-      return true;
+      return true
     }
 
-    return false;
+    return false
   }
 
-  async getFiles({ projectName, user }: GetFileInput) {
+  async getFiles ({ projectName, user }: GetFileInput) {
     const userData = await UsersSchema.findOne({
       name: user,
-      "project.name": projectName,
-    });
+      'project.name': projectName
+    })
 
-    const projectData = JSON.parse(JSON.stringify(userData))?.project;
+    const projectData = JSON.parse(JSON.stringify(userData))?.project
 
-    if (projectData) return projectData.files;
-    return null;
+    if (projectData) return projectData.files
+    return null
   }
 
-  async getProjects({ user }: GetProjectsInput) {
+  async getProjects ({ user }: GetProjectsInput) {
     const userData = await UsersSchema.find({
-      name: user,
-    });
+      name: user
+    })
 
     const projectData = JSON.parse(JSON.stringify(userData))?.map(
       (val: any) => val.project.name
-    );
+    )
 
-    return projectData;
+    return projectData
   }
 }
 
-export default FileService;
+export default FileService
