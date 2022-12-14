@@ -10,7 +10,8 @@ import {
 export const initializeApolloServer = async (app: any): Promise<void> => {
   // Build the schema
   const schema = await buildSchema({
-    resolvers: [FileResolver]
+    resolvers: [FileResolver],
+    validate: false,
   })
 
   // Create the apollo server
