@@ -10,9 +10,6 @@ export class FileInputType {
   @GqlField((_type) => String)
     name: string
 
-  @GqlField((_type) => String)
-    type: string
-
   @GqlField((_type) => String, { nullable: true })
     content?: string
 }
