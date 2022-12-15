@@ -52,23 +52,17 @@ export class IpController {
         return;
       }
 
-      // const { publicIpAddress, taskArn } = await getIpFromServer()
-
-      const taskArn = "";
+      const { publicIpAddress, taskArn } = await getIpFromServer();
 
       const data = {
         urls: {
-          // api: `http://${publicIpAddress}:1338`,
-          // preview: `http://${publicIpAddress}:9080`,
-          api: "http://localhost:1338",
-          preview: "http://localhost:9080",
+          api: `http://${publicIpAddress}:1338`,
+          preview: `http://${publicIpAddress}:9080`,
+          // api: "http://localhost:1338",
+          // preview: "http://localhost:9080",
         },
         taskArn,
       };
-      // const data = {
-      //   api: "http://localhost:1338",
-      //   preview: "http://localhost:9080",
-      // };
 
       res.status(200).send({
         success: true,
