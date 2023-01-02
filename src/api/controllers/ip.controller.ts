@@ -65,8 +65,8 @@ export class IpController {
 
       const data = {
         urls: {
-          api: `https://${slug}:1338`,
-          preview: `https://${slug}:9080`,
+          api: `https://${slug}.codenative.link:1338`,
+          preview: `https://${slug}.codenative.link:9080`,
           // api: "http://localhost:1338",
           // preview: "http://localhost:9080",
         },
