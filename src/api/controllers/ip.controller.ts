@@ -16,6 +16,7 @@ import { env } from "@config/env";
 
 const AWS_ACCESS_KEY_ID = env.awsAccessKeyId as string;
 const AWS_SECRET_ACCESS_KEY = env.awsSecretAccessKey as string;
+const PROXY_SERVER = env.proxyServer as string;
 
 const client = new ECSClient({
   region: "us-east-1",
@@ -58,7 +59,7 @@ export class IpController {
 
       const slug = namor.generate({ subset: "manly", words: 2, saltLength: 0 });
 
-      await axios.post("https://proxy.codenative.click/ip/get", {
+      await axios.post(`${PROXY_SERVER}/ip/get`, {
         ip: publicIpAddress,
         slug,
       });
