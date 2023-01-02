@@ -9,6 +9,8 @@ import {
   EC2Client,
   DescribeNetworkInterfacesCommand,
 } from "@aws-sdk/client-ec2";
+import namor from "namor";
+import axios from "axios";
 
 import { env } from "@config/env";
 
@@ -54,10 +56,17 @@ export class IpController {
 
       const { publicIpAddress, taskArn } = await getIpFromServer();
 
+      const slug = namor.generate({ subset: "manly", words: 2, saltLength: 0 });
+
+      await axios.post("https://proxy.codenative.click/ip/get", {
+        ip: publicIpAddress,
+        slug,
+      });
+
       const data = {
         urls: {
-          api: `http://${publicIpAddress}:1338`,
-          preview: `http://${publicIpAddress}:9080`,
+          api: `https://${slug}:1338`,
+          preview: `https://${slug}:9080`,
           // api: "http://localhost:1338",
           // preview: "http://localhost:9080",
         },
