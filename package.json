@@ -44,9 +44,12 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "graphql": "^15.3.0",
+    "http": "^0.0.1-security",
     "mongoose": "^6.7.2",
     "namor": "^2.0.4",
+    "redis": "^4.5.1",
     "reflect-metadata": "^0.1.13",
+    "socket.io": "^4.5.4",
     "type-graphql": "^1.1.1"
   }
 }
