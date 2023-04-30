@@ -78,7 +78,7 @@ export class IpController {
 const getIpFromServer = async () => {
   const command = new RunTaskCommand({
     launchType: "FARGATE",
-    cluster: "codenative",
+    cluster: "Codenative-cluster",
     taskDefinition: "codenative-td",
     networkConfiguration: {
       awsvpcConfiguration: {
@@ -156,7 +156,7 @@ const getIpFromServer = async () => {
 
 const destroyContainer = async (taskArn: string) => {
   const stopTaskCommand = new StopTaskCommand({
-    cluster: "codenative",
+    cluster: "Codenative-cluster",
     task: taskArn,
   });
 
