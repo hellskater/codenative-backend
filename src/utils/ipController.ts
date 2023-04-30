@@ -88,7 +88,7 @@ const getIpFromServer = async () => {
           "subnet-0cec20742d02736d8",
           "subnet-06532c97b6e2c1f74",
         ],
-        securityGroups: ["sg-0aa33ce4c7aed217c"],
+        securityGroups: ["sg-00bb1684ba3d365bf", "sg-02677632f7b235996"],
         assignPublicIp: "ENABLED",
       },
     },
