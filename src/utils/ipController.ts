@@ -77,12 +77,12 @@ export class IpController {
 
 const getIpFromServer = async () => {
   const command = new RunTaskCommand({
-    cluster: "Codedamn",
-    taskDefinition: "test-new",
+    cluster: "codenative",
+    taskDefinition: "codenative-td",
     networkConfiguration: {
       awsvpcConfiguration: {
-        subnets: ["subnet-01aab69fca2c9cead", "subnet-0ef2b41665fe306f9"],
-        securityGroups: ["sg-0aa33ce4c7aed217c"],
+        subnets: ["subnet-05b6b015635666ff0", "subnet-0c7cda2246157d37e", "subnet-0cec20742d02736d8", "subnet-06532c97b6e2c1f74"],
+        securityGroups: ["sg-00bb1684ba3d365bf"],
         assignPublicIp: "ENABLED",
       },
     },
@@ -150,7 +150,7 @@ const getIpFromServer = async () => {
 
 const destroyContainer = async (taskArn: string) => {
   const stopTaskCommand = new StopTaskCommand({
-    cluster: "Codedamn",
+    cluster: "codenative",
     task: taskArn,
   });
 
