@@ -77,12 +77,18 @@ export class IpController {
 
 const getIpFromServer = async () => {
   const command = new RunTaskCommand({
+    launchType: "FARGATE",
     cluster: "codenative",
     taskDefinition: "codenative-td",
     networkConfiguration: {
       awsvpcConfiguration: {
-        subnets: ["subnet-05b6b015635666ff0", "subnet-0c7cda2246157d37e", "subnet-0cec20742d02736d8", "subnet-06532c97b6e2c1f74"],
-        securityGroups: ["sg-00bb1684ba3d365bf"],
+        subnets: [
+          "subnet-05b6b015635666ff0",
+          "subnet-0c7cda2246157d37e",
+          "subnet-0cec20742d02736d8",
+          "subnet-06532c97b6e2c1f74",
+        ],
+        securityGroups: ["sg-00bb1684ba3d365bf", "sg-02677632f7b235996"],
         assignPublicIp: "ENABLED",
       },
     },
