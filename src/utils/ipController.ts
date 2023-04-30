@@ -107,7 +107,7 @@ const getIpFromServer = async () => {
       async function getTaskDetails() {
         const taskCommand = new DescribeTasksCommand({
           tasks: [taskArn],
-          cluster: "Codedamn",
+          cluster: "Codenative-cluster",
         });
         const task = await client.send(taskCommand);
 
