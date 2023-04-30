@@ -29,7 +29,7 @@ export class SocketController {
         if (input === "assignIp") {
           const ipData = await IpController.issueIp();
 
-          await this.addTaskId(ipData!.taskArn, socket.id, ipData!.slug);
+          await this.addTaskId(ipData!?.taskArn, socket.id, ipData!?.slug);
 
           if (ipData) {
             setTimeout(() => {
